@@ -1,0 +1,33 @@
+$smallScreen: 768px;
+
+main {
+    > * {
+        height: 100%;
+        > * {
+            height: inherit;
+        }
+    }
+
+    > div > section {
+        padding: 10px 0;
+
+        .equation {
+            .input-group-text {
+                text-transform: capitalize;
+            }
+        }
+
+        .sign {
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    
+    aside {
+        border-inline-start: 1px solid #999;
+        overflow: hidden auto;
+    }
+}

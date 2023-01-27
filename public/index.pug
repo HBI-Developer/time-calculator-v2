@@ -1,0 +1,120 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="css/index.css")
+    title Time Calculator
+  body
+
+    - const theme = 'dark'
+    - const times = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years', 'decades', 'centuries', 'millenia']
+    - const percent = (1 / times.length) * 100
+
+    header
+      nav(class=`navbar navbar-${theme} bg-${theme}`)
+        .container-fluid 
+          .navbar-brand.d-flex.align-items-center.gap-2
+            img(src="images/Logo.svg", alt="Time Calculator Logo", width="35", height="35").d-inline-block.align-text-top
+            |  Time Calculator
+
+      .nav.py-2.border-bottom
+        .mx-auto.d-none.d-lg-flex.w-100
+          .container
+            .btn-group.w-100
+              each time, index in times
+                if index === 0
+                  input(type="radio" name="time" id=`${time}` autocomplete="off" checked).btn-check
+                else
+                  input(type="radio" name="time" id=`${time}` autocomplete="off").btn-check
+                label.btn.col-auto(class=`btn-outline-${theme}` for=`${time}` style=`text-transform: capitalize; width: ${percent}%`) #{time}
+
+        
+        button.d-block.col-12.btn.btn-light.d-lg-none(data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="text-transform: capitalize") Seconds
+        .offcanvas.offcanvas-start#offcanvasExample(tabindex="-1" aria-labelledby="offcanvasExampleLabel")
+          .offcanvas-header
+            h5.offcanvas-title#offcanvasExampleLabel Time by:
+            button.btn-close.text-reset(data-bs-dismiss="offcanvas" aria-label="Close")
+
+          .offcanvas-body
+            div 
+              ul.list-group
+                each time, index in times 
+                  if index === 0
+                    a.list-group-item.list-group-item-action.active.disabled(href="#" aria-current="true" style="text-transform: capitalize") #{time}
+                  else
+                    a.list-group-item.list-group-item-action(href="#" aria-current="true" style="text-transform: capitalize") #{time}
+
+    main
+      .row
+        section.col-9
+          .container 
+            .row.gy-2.gy-lg-4
+              .col-12.col-lg-4.card.pb-2.equation
+                .card-body
+                  form
+                    .input-group.input-group-sm.mb-3
+                      span.input-group-text Seconds 
+                      input(type="number" min="0" value="0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default").form-control
+                
+                .btn.btn-danger.remove &times;
+
+              .col-12.col-lg-2.d-flex.d-lg-grid.gap-lg-1.px-sm-0.px-lg-2.sign
+                each oper, index in ['+', '-', '×', '÷']
+                  if index === 0
+                    .col.mx-1.mx-lg-0.col-lg-12.btn.active(class=`btn-${theme}`) #{oper}
+                  else
+                    .col.mx-1.mx-lg-0.col-lg-12.btn(class=`btn-${theme}`) #{oper}
+
+              .col-12.col-lg-4.card.pb-2.equation
+                .card-body
+                  form
+                    .input-group.input-group-sm.mb-3
+                      span.input-group-text Seconds 
+                      input(type="number" min="0" value="0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default").form-control
+
+                .btn.btn-danger.remove &times;
+
+
+        aside.col-3.list-group 
+          button.list-group-item.list-group-item-action.list-group-item-light.add #[span.icon.icon-plus]  Add Time
+          button.list-group-item.list-group-item-action.list-group-item-light.add-group #[span.icon.icon-plus-circle]  Add Time Group
+          button.list-group-item.list-group-item-action.list-group-item-danger.reset #[span.icon.icon-repeat]  Reset
+          button.list-group-item.list-group-item-action.list-group-item-success.calculating #[span.icon.icon-calculator]  Calculating
+
+    footer(class=`bg-${theme} text-center text-white p-2`) Footer
+
+    .result-page 
+      table.table.table-striped.table-bordered 
+        tr 
+          th Time Name
+          th Time
+
+        tr 
+            td Milliseconds 
+            td -
+
+        each time in times
+          tr 
+            td #{time} 
+            td -
+
+      .btn-group
+        .btn.btn-success.re-calc Calculating Again!
+
+    .loading-screen 
+      .clock 
+        .center
+        .hand.hour-hand
+        .hand.minute-hand
+        .hand.second-hand
+        .clock-side.top
+        .clock-side.right 
+        .clock-side.bottom 
+        .clock-side.left 
+
+
+    script(type="module" src="./js/index.js") 
+          
+          
