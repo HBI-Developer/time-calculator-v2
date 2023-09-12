@@ -1,50 +1,13 @@
 doctype html
 html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet", href="css/index.css")
-    title Time Calculator
+  include templates/head.pug
   body
 
     - const theme = 'dark'
     - const times = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years', 'decades', 'centuries', 'millenia']
     - const percent = (1 / times.length) * 100
 
-    header
-      nav(class=`navbar navbar-${theme} bg-${theme}`)
-        .container-fluid 
-          .navbar-brand.d-flex.align-items-center.gap-2
-            img(src="images/Logo.svg", alt="Time Calculator Logo", width="35", height="35").d-inline-block.align-text-top
-            |  Time Calculator
-
-      .nav.py-2.border-bottom
-        .mx-auto.d-none.d-lg-flex.w-100
-          .container
-            .btn-group.w-100
-              each time, index in times
-                if index === 0
-                  input(type="radio" name="time" id=`${time}` autocomplete="off" checked).btn-check
-                else
-                  input(type="radio" name="time" id=`${time}` autocomplete="off").btn-check
-                label.btn.col-auto(class=`btn-outline-${theme}` for=`${time}` style=`text-transform: capitalize; width: ${percent}%`) #{time}
-
-        
-        button.d-block.col-12.btn.btn-light.d-lg-none(data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="text-transform: capitalize") Seconds
-        .offcanvas.offcanvas-start#offcanvasExample(tabindex="-1" aria-labelledby="offcanvasExampleLabel")
-          .offcanvas-header
-            h5.offcanvas-title#offcanvasExampleLabel Time by:
-            button.btn-close.text-reset(data-bs-dismiss="offcanvas" aria-label="Close")
-
-          .offcanvas-body
-            div 
-              ul.list-group
-                each time, index in times 
-                  if index === 0
-                    a.list-group-item.list-group-item-action.active.disabled(href="#" aria-current="true" style="text-transform: capitalize") #{time}
-                  else
-                    a.list-group-item.list-group-item-action(href="#" aria-current="true" style="text-transform: capitalize") #{time}
+    include templates/header.pug
 
     main
       .row
@@ -77,50 +40,13 @@ html(lang="en")
                 .btn.btn-danger.remove &times;
 
 
-        aside.col-3.list-group 
-          button.list-group-item.list-group-item-action.list-group-item-light.d-flex.d-lg-block.justify-content-center.align-items-center.add 
-           | #[span.icon.icon-plus] 
-           | #[span.text.d-none.d-lg-inline Add Time]
-          button.list-group-item.list-group-item-action.list-group-item-light.d-flex.d-lg-block.justify-content-center.align-items-center.add-group 
-           | #[span.icon.icon-plus-circle] 
-           | #[span.text.d-none.d-lg-inline Add Time Group]
-          button.list-group-item.list-group-item-action.list-group-item-danger.d-flex.d-lg-block.justify-content-center.align-items-center.reset 
-           | #[span.icon.icon-repeat] 
-           | #[span.text.d-none.d-lg-inline Reset]
-          button.list-group-item.list-group-item-action.list-group-item-success.d-flex.d-lg-block.justify-content-center.align-items-center.calculating 
-           | #[span.icon.icon-calculator] 
-           | #[span.text.d-none.d-lg-inline Calculating]
+        include templates/sideList.pug
 
     footer(class=`bg-${theme} text-center text-white p-2`) Footer
 
-    .result-page.align-items-start
-      table.table.table-striped.table-bordered 
-        tr 
-          th Time Name
-          th Time
+    include templates/resultPage.pug
 
-        tr 
-            td Milliseconds 
-            td -
-
-        each time in times
-          tr 
-            td #{time} 
-            td -
-
-      .btn-group
-        .btn.btn-success.re-calc Calculating Again!
-
-    .loading-screen 
-      .clock 
-        .center
-        .hand.hour-hand
-        .hand.minute-hand
-        .hand.second-hand
-        .clock-side.top
-        .clock-side.right 
-        .clock-side.bottom 
-        .clock-side.left 
+    include templates/loadingScreen.pug
 
 
     script(type="module" src="./js/index.js") 

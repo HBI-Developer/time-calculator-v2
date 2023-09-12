@@ -1,11 +1,7 @@
-import { reset } from "./variables";
+import reset from "./GeneralFunctions/reset";
 
-$(():void => {
-
-    $("body").on('click', 'aside .reset', ():void => {
-
-        reset();
-
-    });
-
+$((): void => {
+  $("body").on("click", "aside .reset", (): void => {
+    reset();
+  });
 });

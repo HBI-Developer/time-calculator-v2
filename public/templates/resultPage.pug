@@ -1,0 +1,17 @@
+.result-page.align-items-start
+      table.table.table-striped.table-bordered 
+        tr 
+          th Time Name
+          th Time
+
+        tr 
+            td Milliseconds 
+            td -
+
+        each time in times
+          tr 
+            td #{time} 
+            td -
+
+      .btn-group
+        .btn.btn-success.re-calc Calculating Again!

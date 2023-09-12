@@ -1,0 +1,33 @@
+header
+      nav(class=`navbar navbar-${theme} bg-${theme}`)
+        .container-fluid 
+          .navbar-brand.d-flex.align-items-center.gap-2
+            img(src="images/Logo.svg", alt="Time Calculator Logo", width="35", height="35").d-inline-block.align-text-top
+            |  Time Calculator
+
+      .nav.py-2.border-bottom
+        .mx-auto.d-none.d-lg-flex.w-100
+          .container
+            .btn-group.w-100
+              each time, index in times
+                if index === 0
+                  input(type="radio" name="time" id=`${time}` autocomplete="off" checked).btn-check
+                else
+                  input(type="radio" name="time" id=`${time}` autocomplete="off").btn-check
+                label.btn.col-auto(class=`btn-outline-${theme}` for=`${time}` style=`text-transform: capitalize; width: ${percent}%`) #{time}
+
+        
+        button.d-block.col-12.btn.btn-light.d-lg-none(data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" style="text-transform: capitalize") Seconds
+        .offcanvas.offcanvas-start#offcanvasExample(tabindex="-1" aria-labelledby="offcanvasExampleLabel")
+          .offcanvas-header
+            h5.offcanvas-title#offcanvasExampleLabel Time by:
+            button.btn-close.text-reset(data-bs-dismiss="offcanvas" aria-label="Close")
+
+          .offcanvas-body
+            div 
+              ul.list-group
+                each time, index in times 
+                  if index === 0
+                    a.list-group-item.list-group-item-action.active.disabled(href="#" aria-current="true" style="text-transform: capitalize") #{time}
+                  else
+                    a.list-group-item.list-group-item-action(href="#" aria-current="true" style="text-transform: capitalize") #{time}
